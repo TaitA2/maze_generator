@@ -22,6 +22,10 @@ class Window():
         # run self.close method when window is deleted
         self.root.protocol("WM_DELETE_WINDOW", self.close)
     
+    # method to draw a line on the window
+    def draw_line(self, line, fill_color):
+        line.draw(self.canvas, fill_color)
+    
     # method for redrawing all graphics in the window
     def redraw(self):
         # update the root widget
@@ -66,7 +70,15 @@ class Line():
         canvas.create_line(x1, y1, x2, y2, fill=fill_color, width=2)
 
 def main():
+    # create window object
     win = Window(800, 600)
+    # create points
+    point1 = Point(100, 100)
+    point2 = Point(300, 100)
+    # create line from points
+    line = Line(point1, point2)
+    # draw line in red on window
+    win.draw_line(line, "red")
     win.wait_for_close()
 
 if __name__ == "__main__":
