@@ -91,46 +91,59 @@ class Cell():
     # method to draw walls of cell
     def draw(self):
         # create 4 corner points from coords
-        top_left = Point(self.x1, self.y1)
-        bottom_left = Point(self.x1, self.y2)
-        top_right = Point(self.x2, self.y1)
-        bottom_right = Point(self.x2, self.y2)
+        top_left = Point(self._x1, self._y1)
+        bottom_left = Point(self._x1, self._y2)
+        top_right = Point(self._x2, self._y1)
+        bottom_right = Point(self._x2, self._y2)
 
         # if cell has left wall
         if self.has_left_wall:
             # create a line between top left and bottom left
             wall_line = Line(top_left, bottom_left)
-            self.win.draw(wall_line)
+            self._win.draw_line(wall_line, "black")
 
         # if cell has top wall
         if self.has_top_wall:
             # create a line between top left and top right
             wall_line = Line(top_left, top_right)
-            self.win.draw(wall_line)
+            self._win.draw_line(wall_line, "black")
 
         # if cell has bottom wall
         if self.has_bottom_wall:
             # create a line between bottom left and bottom right 
             wall_line = Line(bottom_left, bottom_right)
-            self.win.draw(wall_line)
+            self._win.draw_line(wall_line, "black")
 
         # if cell has right wall
         if self.has_right_wall:
             # create a line between top right and bottom left 
             wall_line = Line(top_right, bottom_right)
-            self.win.draw(wall_line)
+            self._win.draw_line(wall_line, "black")
 
 
 def main():
     # create window object
     win = Window(800, 600)
-    # create points
-    point1 = Point(100, 100)
-    point2 = Point(300, 100)
-    # create line from points
-    line = Line(point1, point2)
-    # draw line in red on window
-    win.draw_line(line, "red")
+
+    # # # create points
+    # point1 = Point(100, 100)
+    # point2 = Point(300, 100)
+
+    # # create line from points
+    # line = Line(point1, point2)
+
+    # # draw line in red on window
+    # win.draw_line(line, "red")
+
+    # create cells
+    cell1 = Cell(10, 30, 10, 30, win)
+    cell2 = Cell(30, 50, 10, 30, win)
+    cell3 = Cell(50, 70, 10, 30, win)
+    # draw cells
+    cell1.draw()
+    cell2.draw()
+    cell3.draw()
+    # create window
     win.wait_for_close()
 
 if __name__ == "__main__":
