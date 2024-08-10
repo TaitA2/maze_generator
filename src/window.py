@@ -38,6 +38,33 @@ class Window():
     def close(self):
         self.running = False
 
+# create point class for creating lines
+class Point():
+
+    # constructor to set x and y coords of point
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+# create line class to join points
+class Line():
+
+    # constructor
+    def __init__(self, point1, point2):
+        # save 2 points to be connected
+        self.point1 = point1
+        self.point2 = point2
+    
+    # method to draw a line between 2 points on provided canvas using provided fill color
+    def draw(self, canvas, fill_color):
+        # extract coords from points
+        x1 = self.point1.x
+        y1 = self.point1.y
+        x2 = self.point2.x
+        y2 = self.point2.y
+        # call canvas' create line method using provided args
+        canvas.create_line(x1, y1, x2, y2, fill=fill_color, width=2)
+
 def main():
     win = Window(800, 600)
     win.wait_for_close()
