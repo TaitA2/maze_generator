@@ -119,6 +119,23 @@ class Cell():
             # create a line between top right and bottom left 
             wall_line = Line(top_right, bottom_right)
             self._win.draw_line(wall_line, "black")
+    
+    # method to draw a line connect the center of 2 cells
+    def draw_move(self, to_cell, undo=False):
+        # set fill color 
+        fill_color = "red"
+        if undo:
+            fill_color = "gray"
+        # get center coords of cells
+        from_x = (self._x1 + self._x2) / 2
+        from_y = (self._y1 + self._y2) / 2
+        to_x = (to_cell._x1 + to_cell._x2) / 2
+        to_y = (to_cell._y1 + to_cell._y2) / 2
+        # create center points from coords
+        from_center = Point(from_x, from_y)
+        to_center = Point(to_x, to_y)
+        connecting_line = Line(from_center, to_center)
+        self._win.draw_line(connecting_line, fill_color)
 
 
 def main():
@@ -142,7 +159,8 @@ def main():
     # draw cells
     cell1.draw()
     cell2.draw()
-    cell3.draw()
+    # draw connection between cells
+    cell1.draw_move(cell2)
     # create window
     win.wait_for_close()
 
