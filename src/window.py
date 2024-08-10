@@ -69,6 +69,58 @@ class Line():
         # call canvas' create line method using provided args
         canvas.create_line(x1, y1, x2, y2, fill=fill_color, width=2)
 
+
+# create cell class for dividing maze 
+class Cell():
+    
+    # constructor
+    def __init__(self, x1, x2, y1, y2, win):
+        # set all 4 walls to True
+        self.has_left_wall = True
+        self.has_right_wall = True
+        self.has_top_wall = True
+        self.has_bottom_wall = True
+        # set coords of cell
+        self._x1 = x1
+        self._x2 = x2
+        self._y1 = y1
+        self._y2 = y2
+        # set the window the cell is in
+        self._win = win
+
+    # method to draw walls of cell
+    def draw(self):
+        # create 4 corner points from coords
+        top_left = Point(self.x1, self.y1)
+        bottom_left = Point(self.x1, self.y2)
+        top_right = Point(self.x2, self.y1)
+        bottom_right = Point(self.x2, self.y2)
+
+        # if cell has left wall
+        if self.has_left_wall:
+            # create a line between top left and bottom left
+            wall_line = Line(top_left, bottom_left)
+            self.win.draw(wall_line)
+
+        # if cell has top wall
+        if self.has_top_wall:
+            # create a line between top left and top right
+            wall_line = Line(top_left, top_right)
+            self.win.draw(wall_line)
+
+        # if cell has bottom wall
+        if self.has_bottom_wall:
+            # create a line between bottom left and bottom right 
+            wall_line = Line(bottom_left, bottom_right)
+            self.win.draw(wall_line)
+
+        # if cell has right wall
+        if self.has_right_wall:
+            # create a line between top right and bottom left 
+            wall_line = Line(top_right, bottom_right)
+            self.win.draw(wall_line)
+
+
 def main():
     # create window object
     win = Window(800, 600)
