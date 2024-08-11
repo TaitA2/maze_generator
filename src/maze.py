@@ -1,11 +1,12 @@
 from cell import Cell
 import time
+import random
 
 # class for 2D list of cells
 class Maze():
     
     # constructor
-    def __init__(self, x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win=None):
+    def __init__(self, x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win=None, seed=None):
         # initalise data members
         self.x1 = x1
         self.y1 = y1
@@ -18,6 +19,8 @@ class Maze():
         self._create_cells()
         # break entrance and exit walls
         self._break_entrance_and_exit()
+        if seed:
+            self.seed = random.seed(seed)
 
     def _create_cells(self):
         # initalise list of cell lists
@@ -70,3 +73,13 @@ class Maze():
         entrance_cell.draw()
         exit_cell.has_bottom_wall = False
         exit_cell.draw()
+
+    # recursive method to break cell walls
+    def _break_walls_r(self, i, j):
+        # mark current cell as visited
+        current = self._cells[i][j]
+        current.visited = True
+        # infinte loop
+        while True:
+            # TODO
+            return 

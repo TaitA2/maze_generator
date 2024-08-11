@@ -18,6 +18,8 @@ class Cell():
         self._y2 = y2
         # set the window the cell is in
         self._win = win
+        # initalise a visited data member to False
+        self.visited = False
 
     # method to draw walls of cell
     def draw(self):
