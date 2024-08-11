@@ -21,17 +21,17 @@ class Maze():
         # initalise list of cell lists
         self._cells = []
         # fiterate over rows
-        for i in range(self.num_rows):
+        for i in range(self.num_cols):
             # temporary list of cells created
             cells = []
-            # set x coords based on iteration and maze's x coords
-            x1 = self.x1 + (self.cell_size_x * i)
-            x2 = x1 + self.cell_size_x
+            # set y coords based on iteration and maze's y coords
+            y1 = self.y1 + (self.cell_size_y * i)
+            y2 = y1 + self.cell_size_y
             # iterate over columns
-            for j in range(self.num_cols):
-                # set y coords based on iteration and maze's y coords
-                y1 = self.y1 + (self.cell_size_y * j)
-                y2 = y1 + self.cell_size_y
+            for j in range(self.num_rows):
+                # set x coords based on iteration and maze's x coords
+                x1 = self.x1 + (self.cell_size_x * j)
+                x2 = x1 + self.cell_size_x
                 # add new Cell object with above args and add to temporary list
                 cells.append(Cell(x1, x2, y1, y2, self.win))
             # add temporary list to matrix
@@ -46,10 +46,12 @@ class Maze():
     def _draw_cell(self, i, j):
         # assign indexed cell to var
         cell = self._cells[i][j]
+        # if conditional to allow unit testing
+        if self.win:
         # call Cell's draw function
-        cell.draw()
-        # call maze's _animate() method
-        self._animate()
+            cell.draw()
+            # call maze's _animate() method
+            self._animate()
     
     # method to visualise algorithm in real time
     def _animate(self):
