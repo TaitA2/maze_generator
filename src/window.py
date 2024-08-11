@@ -75,7 +75,7 @@ class Line():
 class Cell():
     
     # constructor
-    def __init__(self, x1, x2, y1, y2, win):
+    def __init__(self, x1, x2, y1, y2, win=None):
         # set all 4 walls to True
         self.has_left_wall = True
         self.has_right_wall = True
@@ -143,7 +143,7 @@ class Cell():
 class Maze():
     
     # constructor
-    def __init__(self, x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win):
+    def __init__(self, x1, y1, num_rows, num_cols, cell_size_x, cell_size_y, win=None):
         # initalise data members
         self.x1 = x1
         self.y1 = y1
