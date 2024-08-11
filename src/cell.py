@@ -32,24 +32,47 @@ class Cell():
             # create a line between top left and bottom left
             wall_line = Line(top_left, bottom_left)
             self._win.draw_line(wall_line, "black")
+        
+        else:
+            # create a line between top left and bottom left
+            wall_line = Line(top_left, bottom_left)
+            self._win.draw_line(wall_line, "#d9d9d9")
 
         # if cell has top wall
         if self.has_top_wall:
             # create a line between top left and top right
             wall_line = Line(top_left, top_right)
             self._win.draw_line(wall_line, "black")
+        
+        # if cell has top wall
+        else:
+            # create a line between top left and top right
+            wall_line = Line(top_left, top_right)
+            self._win.draw_line(wall_line, "#d9d9d9")
 
         # if cell has bottom wall
         if self.has_bottom_wall:
             # create a line between bottom left and bottom right 
             wall_line = Line(bottom_left, bottom_right)
             self._win.draw_line(wall_line, "black")
+        
+        # if cell has bottom wall
+        else:
+            # create a line between bottom left and bottom right 
+            wall_line = Line(bottom_left, bottom_right)
+            self._win.draw_line(wall_line, "#d9d9d9")
 
         # if cell has right wall
         if self.has_right_wall:
             # create a line between top right and bottom left 
             wall_line = Line(top_right, bottom_right)
             self._win.draw_line(wall_line, "black")
+       
+        # if cell has right wall
+        else:
+            # create a line between top right and bottom left 
+            wall_line = Line(top_right, bottom_right)
+            self._win.draw_line(wall_line, "#d9d9d9")
     
     # method to draw a line connect the center of 2 cells
     def draw_move(self, to_cell, undo=False):

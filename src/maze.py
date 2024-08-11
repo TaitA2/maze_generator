@@ -16,6 +16,8 @@ class Maze():
         self.win = win
         # call _create_cells() method
         self._create_cells()
+        # break entrance and exit walls
+        self._break_entrance_and_exit()
 
     def _create_cells(self):
         # initalise list of cell lists
@@ -59,3 +61,12 @@ class Maze():
         self.win.redraw()
         # wait short time for eyes to keep up
         time.sleep(0.025)
+
+    # method to remove maze's entrance and exit walls
+    def _break_entrance_and_exit(self):
+        entrance_cell = self._cells[0][0]
+        exit_cell = self._cells[-1][-1]
+        entrance_cell.has_top_wall = False
+        entrance_cell.draw()
+        exit_cell.has_bottom_wall = False
+        exit_cell.draw()
