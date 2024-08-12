@@ -33,14 +33,14 @@ class Maze():
         for i in range(self.num_cols):
             # temporary list of cells created
             cells = []
-            # set y coords based on iteration and maze's y coords
-            y1 = self.y1 + (self.cell_size_y * i)
-            y2 = y1 + self.cell_size_y
+            # set x coords based on iteration and maze's x coords
+            x1 = self.x1 + (self.cell_size_x * i)
+            x2 = x1 + self.cell_size_x
             # iterate over columns
             for j in range(self.num_rows):
-                # set x coords based on iteration and maze's x coords
-                x1 = self.x1 + (self.cell_size_x * j)
-                x2 = x1 + self.cell_size_x
+                # set y coords based on iteration and maze's y coords
+                y1 = self.y1 + (self.cell_size_y * j)
+                y2 = y1 + self.cell_size_y
                 # add new Cell object with above args and add to temporary list
                 cells.append(Cell(x1, x2, y1, y2, self.win))
             # add temporary list to matrix
@@ -91,28 +91,28 @@ class Maze():
             try:
                 above = self._cells[i - 1][j]
                 if above.visited == False and i > 0:                        
-                    to_visit.append(("above", i - 1, j))
+                    to_visit.append(("left", i - 1, j))
             except IndexError:
                 pass
 
             try:
                 below = self._cells[i + 1][j]
                 if below.visited == False and i < self.num_cols:                        
-                    to_visit.append(("below", i + 1, j))
+                    to_visit.append(("right", i + 1, j))
             except IndexError:
                 pass
 
             try:
                 left = self._cells [i][j - 1]
                 if left.visited == False and j > 0:                        
-                    to_visit.append(("left", i, j - 1))
+                    to_visit.append(("above", i, j - 1))
             except IndexError:
                 pass
 
             try:
                 right = self._cells[i][j + 1]
                 if right.visited == False and j < self.num_rows:                        
-                    to_visit.append(("right", i, j + 1))
+                    to_visit.append(("below", i, j + 1))
             except IndexError:
                 pass
             
@@ -158,7 +158,7 @@ class Maze():
         # set current var to corresponding cell 
         current = self._cells[i][j]
         # list of tuples for directions containing direction name and indices
-        directions = [("above", i - 1, j), ("below", i + 1, j), ("left", i, j - 1), ("right", i, j + 1)]
+        directions = [("left", i - 1, j), ("right", i + 1, j), ("above", i, j - 1), ("below", i, j + 1)]
         # call the animate method
         self._animate()
         # set current cell's visited status to True

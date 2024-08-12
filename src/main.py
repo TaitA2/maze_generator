@@ -8,7 +8,9 @@ def main():
     win = Window(1810, 1610)
 
     # create Maze object
-    maze = Maze(10, 10, 18, 12, 20, 20, win)
+    num_rows = 5
+    num_cols = 10
+    maze = Maze(10, 10, num_rows, num_cols, 20, 20, win)
 
     # solve the maze
     maze.solve()
