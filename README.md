@@ -4,7 +4,7 @@ A python program for creating and then solving mazes.
 
 
 ## Demo
-![](https://github.com/TaitA2/maze_generator/maze.gif)
+![](https://github.com/TaitA2/maze_generator/blob/main/maze.gif)
 
 
 ## Usage
