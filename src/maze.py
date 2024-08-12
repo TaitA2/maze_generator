@@ -83,6 +83,7 @@ class Maze():
         # mark current cell as visited
         current = self._cells[i][j]
         current.visited = True
+        self._animate()
         # infinte loop
         while True:
             # TODO

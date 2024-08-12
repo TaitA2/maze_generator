@@ -5,12 +5,14 @@ from maze import Maze
 def main():
 
     # create window object
-    win = Window(1810, 1610)
+    win = Window(810, 610)
 
     # create Maze object
-    num_rows = 5
-    num_cols = 10
-    maze = Maze(10, 10, num_rows, num_cols, 20, 20, win)
+    num_rows = 12
+    num_cols = 18
+    cell_size_x = 20
+    cell_size_y = 20
+    maze = Maze(10, 10, num_rows, num_cols, cell_size_x, cell_size_y, win)
 
     # solve the maze
     maze.solve()
