@@ -5,10 +5,13 @@ from maze import Maze
 def main():
 
     # create window object
-    win = Window(810, 610)
+    win = Window(1810, 1610)
 
     # create Maze object
-    maze = Maze(10, 10, 9, 6, 20, 20, win)
+    maze = Maze(10, 10, 18, 12, 20, 20, win)
+
+    # solve the maze
+    maze.solve()
 
     # display window
     win.wait_for_close()

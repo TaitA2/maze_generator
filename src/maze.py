@@ -150,3 +150,47 @@ class Maze():
         for i in range(len(self._cells)):
             for j in range(len(self._cells[i])):
                 self._cells[i][j].visited = False
+
+    def solve(self):
+        return self._solve_r(0, 0)
+    
+    def _solve_r(self, i, j):
+        # set current var to corresponding cell 
+        current = self._cells[i][j]
+        # list of tuples for directions containing direction name and indices
+        directions = [("above", i - 1, j), ("below", i + 1, j), ("left", i, j - 1), ("right", i, j + 1)]
+        # call the animate method
+        self._animate()
+        # set current cell's visited status to True
+        current.visited = True
+        # return True if current cell is the end cell
+        if current == self._cells[-1][-1]:
+            return True
+        # iterate over each possible direction
+        for direction in directions:
+            target_i = direction[1]
+            target_j = direction[2]
+            try:
+                target_cell = self._cells[target_i][target_j]
+            except IndexError:
+                pass
+            available = False
+
+            if direction[0] == "above" and target_i >= 0 and not target_cell.visited and not target_cell.has_bottom_wall and not current.has_top_wall:
+                    available = True
+            if direction[0] == "below" and target_i <= self.num_cols and not target_cell.visited and not target_cell.has_top_wall and not current.has_bottom_wall:
+                    available = True
+            if direction[0] == "left" and target_j >= 0 and not target_cell.visited and not target_cell.has_right_wall and not current.has_left_wall:
+                    available = True
+            if direction[0] == "right" and target_j <= self.num_rows and not target_cell.visited and not target_cell.has_left_wall and not current.has_right_wall:
+                    available = True
+
+            if available:
+                current.draw_move(target_cell)
+                r = self._solve_r(target_i, target_j)
+                if r:
+                    return True
+                else:
+                    current.draw_move(target_cell, undo=True)
+        return False
+
