@@ -21,6 +21,10 @@ class Maze():
         self._break_entrance_and_exit()
         if seed:
             self.seed = random.seed(seed)
+        # randomly break walls in the maze
+        self._break_walls_r(0, 0)
+        # reset cells visited status
+        self._reset_cells_visited()
 
     def _create_cells(self):
         # initalise list of cell lists
@@ -82,4 +86,67 @@ class Maze():
         # infinte loop
         while True:
             # TODO
-            return 
+            to_visit = []
+            # i, j tuples for each neighboring cell
+            try:
+                above = self._cells[i - 1][j]
+                if above.visited == False and i > 0:                        
+                    to_visit.append(("above", i - 1, j))
+            except IndexError:
+                pass
+
+            try:
+                below = self._cells[i + 1][j]
+                if below.visited == False and i < self.num_cols:                        
+                    to_visit.append(("below", i + 1, j))
+            except IndexError:
+                pass
+
+            try:
+                left = self._cells [i][j - 1]
+                if left.visited == False and j > 0:                        
+                    to_visit.append(("left", i, j - 1))
+            except IndexError:
+                pass
+
+            try:
+                right = self._cells[i][j + 1]
+                if right.visited == False and j < self.num_rows:                        
+                    to_visit.append(("right", i, j + 1))
+            except IndexError:
+                pass
+            
+            # if zero possible directions 
+            if to_visit == []:
+                current.draw()
+                return
+            
+            direction = random.randrange(len(to_visit))
+            target_cell = to_visit[direction]
+            target_i = target_cell[1]
+            target_j = target_cell[2]
+            target = self._cells[target_i][target_j]            
+                
+            if target_cell[0] == "above":
+                current.has_top_wall = False
+                target.has_bottom_wall = False
+
+            if target_cell[0] == "below":
+                current.has_bottom_wall = False
+                target.has_top_wall = False
+
+            if target_cell[0] == "left":
+                current.has_left_wall = False
+                target.has_right_wall = False
+
+            if target_cell[0] == "right":
+                current.has_right_wall = False
+                target.has_left_wall = False
+            
+            
+            self._break_walls_r(target_i, target_j)
+
+    def _reset_cells_visited(self):
+        for i in range(len(self._cells)):
+            for j in range(len(self._cells[i])):
+                self._cells[i][j].visited = False
